@@ -1,0 +1,17 @@
+---
+description: After any edit, commit and push to GitHub without asking
+alwaysApply: true
+---
+
+# Auto-sync GitHub
+
+每次更新都同步到 GitHub，不用問我。
+
+This project overrides the usual “only commit when asked” habit:
+
+- After you change files, **commit and push to `origin`** in the same turn.
+- Do not ask for permission to commit or push.
+- If the tree is clean, skip silently.
+- Remote: `lovinaluo10/wedding` → Pages: `https://lovinaluo10.github.io/wedding/`
+
+Follow `.cursor/skills/auto-sync-github/SKILL.md` for the exact git steps.
