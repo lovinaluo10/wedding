@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#3b0505" />
+  <title>圓山秘宴 · 電子喜帖</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="sky-bg" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <button type="button" id="skip-btn" class="skip-btn">
+    跳過解謎，直接看喜帖
+  </button>
+
+  <!-- ========== STAGE 1: WELCOME ========== -->
+  <section id="stage-welcome" class="stage is-active" data-stage="welcome" aria-label="復古門面與開場">
+    <div class="lantern lantern-l" aria-hidden="true">
+      <div class="lantern-cap"></div>
+      <div class="lantern-body">囍</div>
+      <div class="lantern-tassel"></div>
+    </div>
+    <div class="lantern lantern-r" aria-hidden="true">
+      <div class="lantern-cap"></div>
+      <div class="lantern-body">囍</div>
+      <div class="lantern-tassel"></div>
+    </div>
+
+    <div class="welcome-copy">
+      <p class="eyebrow">THE GRAND HOTEL · TAIPEI</p>
+      <h1>圓山宴會秘境</h1>
+      <p class="hint">
+        <span>賓客您好，歡迎來到圓山宴會秘境，</span>
+        <span>請拖曳金屬鑰匙開啟大門。</span>
+      </p>
+    </div>
+
+    <div class="gate-scene" id="gate-scene">
+      <div class="gate-frame">
+        <div class="door left-door" id="left-door">
+          <div class="door-panel"></div>
+        </div>
+        <div class="door right-door" id="right-door">
+          <div class="door-panel"></div>
+        </div>
+        <div class="lock-plate" id="lock-plate">
+          <div class="keyhole" id="keyhole" aria-label="鎖孔"></div>
+          <span>LOCK</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-dock">
+      <button type="button" id="metal-key" class="metal-key" draggable="true" aria-label="金屬鑰匙，請拖曳至鎖孔">
+        <svg viewBox="0 0 120 40" width="120" height="40" aria-hidden="true">
+          <path fill="#d4af37" stroke="#8a7018" stroke-width="1.2"
+            d="M18 20a10 10 0 1 1 12.4 9.7H54v-4h6v4h8v-6h6v6h10v-4h6v8H30.4A10 10 0 0 1 18 20Zm0 0a4.5 4.5 0 1 0 0.1 0Z" />
+        </svg>
+        <span>拖曳鑰匙</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ========== STAGE: GREETING ========== -->
+  <section id="stage-greeting" class="stage stage-greeting" data-stage="greeting" hidden aria-label="迎賓">
+    <div class="greeting-photo" aria-hidden="true"></div>
+    <div class="greeting-veil" aria-hidden="true"></div>
+    <div class="greeting-copy">
+      <p class="eyebrow">THE GRAND HOTEL</p>
+      <h2>歡迎蒞臨</h2>
+      <p class="greeting-names">張堙森 · 羅珮婷</p>
+      <button type="button" id="enter-room-btn" class="gold-btn greeting-btn">進入客房</button>
+    </div>
+  </section>
+
+  <!-- ========== STAGE 2: ROOM ========== -->
+  <section id="stage-room" class="stage" data-stage="room" hidden aria-label="復古客房探索與解謎">
+    <header class="room-header">
+      <p class="eyebrow">SUITE 囍 · GRAND HOTEL</p>
+      <h2>圓山豪華客房</h2>
+      <p>房裡有幾件傢俱微微發亮，點一下就能靠近看。</p>
+    </header>
+
+    <div class="room" id="room">
+      <div class="room-ceiling" aria-hidden="true">
+        <span class="beam"></span>
+        <div class="room-lantern"><span>囍</span><i></i></div>
+      </div>
+
+      <div class="room-wall" aria-hidden="true">
+        <div class="lattice">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="headboard" aria-hidden="true">
+        <div class="head-panel"><span>囍</span></div>
+      </div>
+
+      <div class="bed" aria-hidden="true">
+        <div class="pillows"><span></span><span></span></div>
+        <div class="quilt"></div>
+      </div>
+
+      <div class="sideboard" aria-hidden="true">
+        <div class="cabinet-top"></div>
+        <div class="cabinet-drawers">
+          <i></i><i></i>
+        </div>
+      </div>
+
+      <div class="nightstand" aria-hidden="true">
+        <div class="cabinet-top"></div>
+        <div class="cabinet-drawers">
+          <i></i>
+        </div>
+      </div>
+
+      <div class="room-floor" aria-hidden="true">
+        <div class="carpet"></div>
+      </div>
+
+      <button type="button" class="hotspot wardrobe-hotspot" data-title="衣櫃" data-hint="櫃門輕掩著，裡面掛著一件暗紅禮服。" data-detail="口袋與衣襯都是空的。" aria-label="衣櫃">
+        <div class="prop wardrobe-prop">
+          <div class="wardrobe-crown"></div>
+          <div class="wardrobe-doors">
+            <span></span>
+            <span class="ajar"></span>
+          </div>
+          <div class="wardrobe-plinth"></div>
+        </div>
+      </button>
+
+      <button type="button" class="hotspot envelope-hotspot" data-title="紅包袋" data-hint="袋上只繡了一個囍字。" data-detail="裡頭是空白紅紙，沒有數字。" aria-label="床頭櫃上的紅包袋">
+        <div class="prop envelope-prop">
+          <div class="flap"></div>
+          <strong>囍</strong>
+        </div>
+      </button>
+
+      <button type="button" class="hotspot calendar-hotspot" data-modal="calendar" data-title="撕頁日曆" data-hint="日曆停在立冬。也許該再翻幾頁。" aria-label="撕頁日曆">
+        <div class="prop calendar-prop">
+          <div class="cal-bind"></div>
+          <div class="cal-leaf">
+            <span>NOV</span>
+            <strong>11</strong>
+            <em>立冬</em>
+          </div>
+        </div>
+      </button>
+
+      <button type="button" class="hotspot gallery-hotspot" data-modal="gallery" data-title="舊相框" data-hint="照片裡的人笑得很甜，故事的起點記在牆上的日曆裡。" aria-label="舊相框">
+        <div class="prop frames-prop">
+          <div class="mini-frame f1"></div>
+          <div class="mini-frame f2"></div>
+          <div class="mini-frame f3"></div>
+        </div>
+      </button>
+
+      <button type="button" class="hotspot phone-hotspot" data-modal="phone" data-title="轉盤電話" data-hint="聽筒沒掛好，似乎還留著一句話。" aria-label="轉盤電話">
+        <div class="prop phone-prop">
+          <div class="phone-base"></div>
+          <div class="phone-dial"></div>
+          <div class="phone-handset"></div>
+        </div>
+      </button>
+
+      <button type="button" class="hotspot safe-hotspot" data-modal="safe" data-title="古董保險箱" data-hint="四位數密碼鎖著。線索應該就在這間房裡。" aria-label="古董保險箱">
+        <div class="prop safe-prop">
+          <div class="safe-door">
+            <div class="safe-dial"></div>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div id="inspect" class="inspect" hidden>
+      <button type="button" class="inspect-dim" data-close-inspect aria-label="回到客房"></button>
+      <div class="inspect-card" role="dialog" aria-modal="true" aria-labelledby="inspect-title">
+        <button type="button" class="modal-close" data-close-inspect aria-label="關閉">×</button>
+        <p class="eyebrow" id="inspect-title"></p>
+        <div id="inspect-stage" class="inspect-stage"></div>
+        <p id="inspect-hint" class="inspect-hint"></p>
+        <p id="inspect-detail" class="inspect-hint inspect-detail" hidden></p>
+        <button type="button" id="inspect-open" class="gold-btn">仔細查看</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STAGE 3: INVITATION + RSVP ========== -->
+  <section id="stage-invite" class="stage" data-stage="invite" hidden aria-label="喜帖資訊與 RSVP">
+    <article class="invite-card">
+      <p class="eyebrow">THE GRAND BANQUET</p>
+      <h2 class="couple-names">新郎 張堙森 · 新娘 羅珮婷</h2>
+      <p class="invite-seal">謹訂於</p>
+      <p class="invite-date">2027 年 2 月 21 日<span>（星期日）中午</span></p>
+      <p class="invite-place">台北圓山大飯店 崑崙廳（12樓）</p>
+      <button type="button" id="transit-btn" class="transit-btn" data-open-modal="transit">交通指引</button>
+
+      <ol class="timeline">
+        <li><time>11:00</time><span>觀禮證婚儀式</span></li>
+        <li><time>12:00</time><span>圓山大廳 貴賓尊榮大合影</span></li>
+        <li><time>12:30</time><span>喜宴盛大開席</span></li>
+      </ol>
+    </article>
+
+    <form id="rsvp-form" class="rsvp-form" novalidate>
+      <h3>賓客登記</h3>
+      <p class="form-lead">敬請填寫以下資料，以便為您預留席次。</p>
+
+      <label class="field">
+        <span>貴賓姓名 <em>*</em></span>
+        <input type="text" name="name" required autocomplete="name" placeholder="請輸入姓名" />
+      </label>
+
+      <label class="field">
+        <span>聯絡電話 <em>*</em></span>
+        <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="09xx-xxx-xxx" />
+      </label>
+
+      <fieldset class="field">
+        <legend>是否出席 2027/02/21 喜宴 <em>*</em></legend>
+        <label class="choice"><input type="radio" name="attendance" value="準時赴約" required /> 準時赴約</label>
+        <label class="choice"><input type="radio" name="attendance" value="遺憾無法出席" /> 遺憾無法出席</label>
+      </fieldset>
+
+      <div id="attending-block" class="conditional-block" hidden>
+        <fieldset class="field">
+          <legend>是否參與 11:00 證婚儀式觀禮 <em>*</em></legend>
+          <label class="choice"><input type="radio" name="ceremony" value="是，願意提早到場觀禮" /> 是，願意提早到場觀禮</label>
+          <label class="choice"><input type="radio" name="ceremony" value="否，僅參加喜宴" /> 否，僅參加喜宴</label>
+        </fieldset>
+
+        <label id="ceremony-count-field" class="field" hidden>
+          <span>證婚觀禮人數 <em>*</em></span>
+          <input type="number" name="ceremonyCount" min="1" max="20" value="1" />
+        </label>
+
+        <fieldset class="field banquet-details">
+          <legend>喜宴細節</legend>
+          <label>喜宴出席總人數
+            <input type="number" name="guestCount" min="1" max="30" value="1" />
+          </label>
+          <label>素食人數
+            <input type="number" name="vegCount" min="0" max="30" value="0" />
+          </label>
+          <label>兒童椅數量
+            <input type="number" name="kidsChair" min="0" max="10" value="0" />
+          </label>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>是否需要紙本喜帖 <em>*</em></legend>
+          <label class="choice"><input type="radio" name="paperInvite" value="需要（請寄送實體喜帖）" /> 需要（請寄送實體喜帖）</label>
+          <label class="choice"><input type="radio" name="paperInvite" value="不需要（保存電子喜帖即可）" /> 不需要（保存電子喜帖即可）</label>
+        </fieldset>
+
+        <label id="address-field" class="field" hidden>
+          <span>郵遞區號與寄送地址 <em>*</em></span>
+          <input type="text" name="address" placeholder="例：104 台北市中山區……" />
+        </label>
+      </div>
+
+      <label class="field" id="blessing-field">
+        <span>給新人的祝福</span>
+        <textarea name="blessing" rows="4" placeholder="寫下一句想對我們說的話……"></textarea>
+      </label>
+
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+
+      <button type="submit" id="submit-btn" class="gold-btn">送出賓客登記</button>
+    </form>
+  </section>
+
+  <!-- ========== VIP PASS / THANK YOU ========== -->
+  <section id="stage-vip" class="stage" data-stage="vip" hidden aria-label="登記完成">
+    <article class="vip-pass" id="vip-pass">
+      <div id="vip-attending">
+        <p class="eyebrow">GRAND HOTEL · VIP PASS</p>
+        <h2>宴席通關卡片</h2>
+        <p class="vip-name" id="vip-name"></p>
+        <p class="vip-msg">2027 年 2 月 21 日中午<br />台北圓山大飯店 崑崙廳（12樓）見！</p>
+        <a id="gcal-link" class="gold-btn" target="_blank" rel="noopener noreferrer">📅 新增至 Google 日曆</a>
+      </div>
+      <div id="vip-regret" hidden>
+        <p class="eyebrow">WITH LOVE</p>
+        <h2>謝謝您</h2>
+        <p class="vip-name" id="vip-name-regret"></p>
+        <p class="vip-msg vip-thanks">
+          謝謝您撥空填寫<br />
+          知道您的心意就很暖了。<br />
+          若之後方便、想來聚一聚，<br />
+          隨時跟我們說聲就好。
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ========== MODALS ========== -->
+  <div id="modal-root" class="modal-root" hidden>
+    <div class="modal-backdrop" data-close="true"></div>
+
+    <div class="modal" id="modal-calendar" role="dialog" aria-labelledby="cal-title" hidden>
+      <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
+      <h3 id="cal-title">📅 牆上的撕頁日曆</h3>
+      <div class="tear-calendar">
+        <div class="tear-head">
+          <button type="button" id="cal-prev">◀ 上一頁</button>
+          <p id="cal-caption"></p>
+          <button type="button" id="cal-next">下一頁 ▶</button>
+        </div>
+        <div class="tear-body">
+          <p class="tear-month" id="cal-month-en"></p>
+          <div class="cal-grid" id="cal-grid"></div>
+          <p class="tear-note" id="cal-note"></p>
+        </div>
+      </div>
+      <p id="cal-hint" class="slide-hint" hidden>這一頁被紅筆圈住了。或許開得了那個箱子。</p>
+    </div>
+
+    <div class="modal" id="modal-safe" role="dialog" aria-labelledby="safe-title" hidden>
+      <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
+      <h3 id="safe-title">🗄️ 古董保險箱</h3>
+      <p class="modal-lead">請輸入四位數密碼</p>
+      <div class="safe-display" id="safe-display">----</div>
+      <div class="keypad" id="keypad">
+        <button type="button" data-key="1">1</button>
+        <button type="button" data-key="2">2</button>
+        <button type="button" data-key="3">3</button>
+        <button type="button" data-key="4">4</button>
+        <button type="button" data-key="5">5</button>
+        <button type="button" data-key="6">6</button>
+        <button type="button" data-key="7">7</button>
+        <button type="button" data-key="8">8</button>
+        <button type="button" data-key="9">9</button>
+        <button type="button" data-key="C" class="key-muted">C</button>
+        <button type="button" data-key="0">0</button>
+        <button type="button" data-key="OK" class="key-gold">🔓</button>
+      </div>
+      <p id="safe-error" class="form-error" hidden>密碼好像不太對喔，再試一次！</p>
+      <button type="button" id="safe-hint-btn" class="text-btn" hidden>查看提示</button>
+      <div class="safe-door-anim" id="safe-unlock" hidden>
+        <p>卡嗒——保險箱開啟了。</p>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-phone" role="dialog" aria-labelledby="phone-title" hidden>
+      <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
+      <h3 id="phone-title">☎️ 老式轉盤電話</h3>
+      <button type="button" id="play-message" class="gold-btn">聆聽聽筒留言</button>
+      <div id="phone-wave" class="phone-wave" hidden>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <blockquote id="phone-script" hidden>
+        喂？這裡是圓山大飯店……請幫我確認牆上日曆的日期，那就是通往秘宴的鑰匙。
+      </blockquote>
+    </div>
+
+    <div class="modal modal-gallery" id="modal-gallery" role="dialog" aria-labelledby="gallery-title" hidden>
+      <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
+      <h3 id="gallery-title">🖼️ 舊相框牆</h3>
+      <div class="ornate-frame">
+        <div class="polaroid-stage">
+          <button type="button" id="photo-prev" class="nav-arrow" aria-label="上一張">◀</button>
+          <!--
+            如何替換真實合照：
+            1. 將 3 張照片放入 images/ 資料夾
+            2. 檔名分別為 photo1.jpg、photo2.jpg、photo3.jpg
+            3. 建議直式或正方形、檔案小於 1MB，以利手機載入
+            4. 若檔案尚未放入，下方會自動顯示復古佔位畫面
+          -->
+          <figure class="polaroid">
+            <img id="gallery-photo" src="images/photo1.jpg" alt="新人合照 1" />
+            <figcaption id="gallery-caption">Photo 1</figcaption>
+          </figure>
+          <button type="button" id="photo-next" class="nav-arrow" aria-label="下一張">▶</button>
+        </div>
+      </div>
+      <p class="gallery-note">照片裡的新人笑得很甜，這場相遇與承諾的起點，都記在牆上的日曆裡了。</p>
+    </div>
+
+    <div class="modal modal-transit" id="modal-transit" role="dialog" aria-labelledby="transit-title" hidden>
+      <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
+      <h3 id="transit-title">交通指引</h3>
+
+      <section class="transit-block transit-block-address">
+        <h4>會場地址</h4>
+        <p>10461 台北市中山區中山北路四段 1 號<br />台北圓山大飯店 崑崙廳（12樓）</p>
+        <p>電話：02-2886-8888</p>
+        <a class="transit-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E5%8C%97%E5%9C%93%E5%B1%B1%E5%A4%A7%E9%A3%AF%E5%BA%97" target="_blank" rel="noopener noreferrer">開啟 Google 地圖</a>
+      </section>
+
+      <section class="transit-block transit-block-shuttle">
+        <h4><span class="transit-kicker">SHUTTLE</span>免費接駁車</h4>
+        <p class="transit-lead">因飯店現場車位有限，請多加利用免費接駁專車前往。</p>
+        <p>捷運圓山站（花博公園）⇄ 圓山大飯店</p>
+        <p>上車：圓山站 <strong>1 號出口</strong>，前方約 50 公尺右側玉門街站牌。</p>
+        <p>免費搭乘，座位有限；發車時間若調整恕不另行通知。<br />洽詢：02-2886-1818 轉 1810</p>
+        <figure class="transit-map" aria-label="接駁車路線示意圖">
+          <svg viewBox="0 0 360 250" role="img">
+            <rect width="360" height="250" fill="#1a100c"/>
+            <text x="180" y="22" text-anchor="middle" fill="#d4af37" font-size="13">接駁路線示意圖</text>
+            <!-- park area -->
+            <rect x="40" y="90" width="160" height="110" fill="#14241c" stroke="#2a4a38" stroke-width="1"/>
+            <text x="120" y="148" text-anchor="middle" fill="#7a9a84" font-size="11">花博公園</text>
+            <!-- roads -->
+            <line x1="40" y1="70" x2="320" y2="70" stroke="#6b5340" stroke-width="7"/>
+            <line x1="220" y1="70" x2="220" y2="210" stroke="#6b5340" stroke-width="7"/>
+            <line x1="40" y1="210" x2="300" y2="210" stroke="#8a7018" stroke-width="8"/>
+            <text x="48" y="64" fill="#f0d9a8" font-size="10">玉門街</text>
+            <text x="228" y="150" fill="#f0d9a8" font-size="10">民族西路</text>
+            <text x="250" y="204" fill="#f3e2a0" font-size="10">中山北路</text>
+            <!-- MRT -->
+            <rect x="56" y="78" width="72" height="28" rx="3" fill="#8b0000" stroke="#d4af37"/>
+            <text x="92" y="96" text-anchor="middle" fill="#f3e2a0" font-size="10">捷運圓山站</text>
+            <text x="92" y="118" text-anchor="middle" fill="#f0d9a8" font-size="9">1號出口</text>
+            <!-- hotel -->
+            <rect x="248" y="48" width="72" height="28" rx="3" fill="#8b0000" stroke="#d4af37"/>
+            <text x="284" y="66" text-anchor="middle" fill="#f3e2a0" font-size="10">圓山大飯店</text>
+            <!-- shuttle path -->
+            <path d="M92 106 L92 70 L220 70 L220 210 L284 210 L284 76" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="284,70 278,82 290,82" fill="#d4af37"/>
+            <circle cx="118" cy="70" r="5" fill="#d4af37"/>
+            <text x="130" y="74" fill="#f3e2a0" font-size="9">站牌</text>
+            <text x="48" y="236" fill="#ecd9b0" font-size="9">美術館</text>
+            <text x="200" y="236" fill="#ecd9b0" font-size="9">約 20–30 分鐘一班</text>
+          </svg>
+        </figure>
+
+        <h5 class="transit-schedule-title">圓山大飯店 → 捷運圓山站</h5>
+        <div class="transit-schedule" aria-label="飯店往捷運時刻表">
+          <span>06:30</span><span>07:00</span><span>07:30</span><span>08:00</span><span>08:20</span><span>08:40</span>
+          <span>09:00</span><span>09:30</span><span>10:00</span><span>10:30</span><span>11:00</span><span>11:20</span>
+          <span>11:40</span><span>12:00</span><span>12:20</span><span>12:40</span><span>13:00</span><span>13:30</span>
+          <span>14:00</span><span>14:30</span><span>15:00</span><span>15:20</span><span>15:40</span><span>16:00</span>
+          <span>16:20</span><span>16:40</span><span>17:00</span><span>17:20</span><span>17:40</span><span>18:00</span>
+          <span>18:20</span><span>18:40</span><span>19:00</span><span>19:20</span><span>19:40</span><span>20:00</span>
+          <span>20:20</span><span>20:40</span><span>21:00</span><span>21:20</span><span>21:40</span><span>22:00</span>
+        </div>
+
+        <h5 class="transit-schedule-title">捷運圓山站 → 圓山大飯店</h5>
+        <div class="transit-schedule" aria-label="捷運往飯店時刻表">
+          <span>06:40</span><span>07:10</span><span>07:40</span><span>08:10</span><span>08:30</span><span>08:50</span>
+          <span>09:10</span><span>09:40</span><span>10:10</span><span>10:40</span><span>11:10</span><span>11:30</span>
+          <span>11:50</span><span>12:10</span><span>12:30</span><span>12:50</span><span>13:10</span><span>13:40</span>
+          <span>14:10</span><span>14:40</span><span>15:10</span><span>15:30</span><span>15:50</span><span>16:10</span>
+          <span>16:30</span><span>16:50</span><span>17:10</span><span>17:30</span><span>17:50</span><span>18:10</span>
+          <span>18:30</span><span>18:50</span><span>19:10</span><span>19:30</span><span>19:50</span><span>20:10</span>
+          <span>20:30</span><span>20:50</span><span>21:10</span><span>21:30</span><span>21:50</span><span>22:10</span>
+          <span>22:25</span><span>22:45</span><span>23:05</span>
+        </div>
+        <p class="transit-note">時刻表僅供參考，實際班次請以飯店公告為準。</p>
+      </section>
+
+      <section class="transit-block transit-block-drive">
+        <h4><span class="transit-kicker">GO</span>自行前往</h4>
+
+        <article class="transit-route">
+          <h5>開車路線一</h5>
+          <p>高速公路下交流道後，經松江路 → 民族東路 → 中山北路，再依路標前往圓山大飯店。</p>
+          <figure class="transit-map" aria-label="開車路線一示意圖">
+            <svg viewBox="0 0 360 260" role="img">
+              <rect width="360" height="260" fill="#1a100c"/>
+              <text x="180" y="22" text-anchor="middle" fill="#d4af37" font-size="13">路線一示意圖</text>
+              <!-- roads -->
+              <line x1="40" y1="210" x2="320" y2="210" stroke="#6b5340" stroke-width="10"/>
+              <line x1="40" y1="150" x2="320" y2="150" stroke="#6b5340" stroke-width="8"/>
+              <line x1="90" y1="70" x2="90" y2="230" stroke="#6b5340" stroke-width="8"/>
+              <line x1="180" y1="40" x2="180" y2="230" stroke="#8a7018" stroke-width="10"/>
+              <line x1="250" y1="70" x2="250" y2="230" stroke="#6b5340" stroke-width="8"/>
+              <!-- labels -->
+              <text x="300" y="204" fill="#f0d9a8" font-size="10">高速公路</text>
+              <text x="300" y="144" fill="#f0d9a8" font-size="10">民族東路</text>
+              <text x="58" y="62" fill="#f0d9a8" font-size="10" transform="rotate(-90 58 62)">松江路</text>
+              <text x="168" y="34" fill="#f3e2a0" font-size="11">中山北路</text>
+              <text x="238" y="62" fill="#f0d9a8" font-size="10" transform="rotate(-90 238 62)">新生高架</text>
+              <!-- route -->
+              <polyline points="250,210 90,210 90,150 180,150 180,58" fill="none" stroke="#c41212" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <polygon points="180,48 174,60 186,60" fill="#c41212"/>
+              <!-- hotel -->
+              <rect x="152" y="56" width="56" height="28" rx="4" fill="#8b0000" stroke="#d4af37" stroke-width="1.5"/>
+              <text x="180" y="74" text-anchor="middle" fill="#f3e2a0" font-size="10">圓山大飯店</text>
+              <circle cx="70" cy="236" r="8" fill="#a31818"/>
+              <text x="70" y="239" text-anchor="middle" fill="#fff" font-size="8">捷</text>
+              <text x="92" y="240" fill="#f0d9a8" font-size="9">淡水線</text>
+            </svg>
+          </figure>
+        </article>
+
+        <article class="transit-route">
+          <h5>開車路線二</h5>
+          <p>新生高架快速道路，往大直車道下，在美僑協會前迴轉進中山北路，走左側車道繞一圈，直接上圓山。</p>
+          <figure class="transit-map" aria-label="開車路線二示意圖">
+            <svg viewBox="0 0 360 240" role="img">
+              <rect width="360" height="240" fill="#1a100c"/>
+              <text x="180" y="22" text-anchor="middle" fill="#d4af37" font-size="13">路線二示意圖</text>
+              <line x1="40" y1="190" x2="320" y2="190" stroke="#6b5340" stroke-width="8"/>
+              <line x1="40" y1="130" x2="320" y2="130" stroke="#6b5340" stroke-width="8"/>
+              <line x1="150" y1="40" x2="150" y2="210" stroke="#8a7018" stroke-width="10"/>
+              <line x1="240" y1="50" x2="240" y2="210" stroke="#6b5340" stroke-width="10"/>
+              <text x="300" y="184" fill="#f0d9a8" font-size="10">高速公路</text>
+              <text x="300" y="124" fill="#f0d9a8" font-size="10">民族東路</text>
+              <text x="138" y="34" fill="#f3e2a0" font-size="11">中山北路</text>
+              <text x="228" y="44" fill="#f0d9a8" font-size="10">新生高架</text>
+              <!-- route: down xinsheng, U-turn to zhongshan, up -->
+              <path d="M240 200 L240 100 Q240 78 210 78 L170 78 Q150 78 150 98 L150 58" fill="none" stroke="#c41212" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <polygon points="150,48 144,60 156,60" fill="#c41212"/>
+              <text x="188" y="72" fill="#f0d9a8" font-size="9">迴轉</text>
+              <rect x="122" y="52" width="56" height="28" rx="4" fill="#8b0000" stroke="#d4af37" stroke-width="1.5"/>
+              <text x="150" y="70" text-anchor="middle" fill="#f3e2a0" font-size="10">圓山大飯店</text>
+              <text x="72" y="148" fill="#ecd9b0" font-size="9">美術館</text>
+            </svg>
+          </figure>
+        </article>
+
+        <article class="transit-route">
+          <h5>開車路線三</h5>
+          <p>中山北路往北直行，經市立美術館、過中山橋後，靠左側車道上圓山大飯店。</p>
+          <figure class="transit-map" aria-label="開車路線三示意圖">
+            <svg viewBox="0 0 360 240" role="img">
+              <rect width="360" height="240" fill="#1a100c"/>
+              <text x="180" y="22" text-anchor="middle" fill="#d4af37" font-size="13">路線三示意圖</text>
+              <line x1="40" y1="190" x2="320" y2="190" stroke="#6b5340" stroke-width="8"/>
+              <line x1="40" y1="130" x2="320" y2="130" stroke="#6b5340" stroke-width="8"/>
+              <line x1="150" y1="40" x2="150" y2="220" stroke="#8a7018" stroke-width="10"/>
+              <line x1="240" y1="50" x2="240" y2="210" stroke="#6b5340" stroke-width="8"/>
+              <text x="300" y="184" fill="#f0d9a8" font-size="10">高速公路</text>
+              <text x="300" y="124" fill="#f0d9a8" font-size="10">民族東路</text>
+              <text x="138" y="34" fill="#f3e2a0" font-size="11">中山北路</text>
+              <text x="78" y="148" fill="#ecd9b0" font-size="9">美術館／中山橋</text>
+              <polyline points="150,210 150,58" fill="none" stroke="#c41212" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <polygon points="150,48 144,60 156,60" fill="#c41212"/>
+              <rect x="122" y="52" width="56" height="28" rx="4" fill="#8b0000" stroke="#d4af37" stroke-width="1.5"/>
+              <text x="150" y="70" text-anchor="middle" fill="#f3e2a0" font-size="10">圓山大飯店</text>
+            </svg>
+          </figure>
+        </article>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
