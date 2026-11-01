@@ -53,13 +53,20 @@
     </div>
 
     <div class="key-dock">
+      <div class="key-guide" id="key-guide" aria-hidden="true">
+        <svg class="key-guide-arrow" viewBox="0 0 40 56" width="28" height="40">
+          <path d="M20 52 V12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 4" stroke-linecap="round" />
+          <path d="M12 20 L20 10 L28 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
       <button type="button" id="metal-key" class="metal-key" draggable="true" aria-label="金屬鑰匙，請拖曳至鎖孔">
         <svg viewBox="0 0 120 40" width="120" height="40" aria-hidden="true">
           <path fill="#d4af37" stroke="#8a7018" stroke-width="1.2"
             d="M18 20a10 10 0 1 1 12.4 9.7H54v-4h6v4h8v-6h6v6h10v-4h6v8H30.4A10 10 0 0 1 18 20Zm0 0a4.5 4.5 0 1 0 0.1 0Z" />
         </svg>
-        <span>拖曳鑰匙</span>
+        <span id="key-label">拖曳鑰匙</span>
       </button>
+      <p class="key-tap-hint" id="key-tap-hint" hidden>拖曳不易時，也可直接點一下鎖孔</p>
     </div>
   </section>
 

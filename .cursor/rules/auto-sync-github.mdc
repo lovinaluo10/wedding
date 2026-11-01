@@ -1,17 +1,15 @@
 ---
-description: After any edit, commit and push to GitHub without asking
+description: Preview locally first; push to GitHub only after user confirms
 alwaysApply: true
 ---
 
-# Auto-sync GitHub
+# Preview first, then GitHub
 
-每次更新都同步到 GitHub，不用問我。
+所有更新都先在 Cursor 內修改預覽，待確認沒問題，經詢問再推上 GitHub。
 
-This project overrides the usual “only commit when asked” habit:
+- After edits: preview locally; **do not** auto commit/push.
+- When done with a change set, **ask** if they want to push.
+- Commit + push only after explicit confirmation (or a clear “推上 GitHub” request).
+- Live site: `https://lovinaluo10.github.io/wedding/`
 
-- After you change files, **commit and push to `origin`** in the same turn.
-- Do not ask for permission to commit or push.
-- If the tree is clean, skip silently.
-- Remote: `lovinaluo10/wedding` → Pages: `https://lovinaluo10.github.io/wedding/`
-
-Follow `.cursor/skills/auto-sync-github/SKILL.md` for the exact git steps.
+Follow `.cursor/skills/auto-sync-github/SKILL.md` for git steps when pushing.

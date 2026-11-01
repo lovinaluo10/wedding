@@ -219,7 +219,14 @@ function bindKeyDrag() {
   const key = $("metal-key");
   const hole = $("keyhole");
   const plate = $("lock-plate");
+  const dock = key.closest(".key-dock");
+  const tapHint = $("key-tap-hint");
+  const keyLabel = $("key-label");
   let dragging = false;
+  let moved = false;
+  let failCount = 0;
+  let unlocked = false;
+  let clickUnlockEnabled = false;
   let start = { x: 0, y: 0 };
   let origin = { x: 0, y: 0 };
 
@@ -237,6 +244,7 @@ function bindKeyDrag() {
     key.style.transform = "";
     key.classList.remove("is-dragging");
     plate.classList.remove("is-target");
+    if (dock) dock.classList.remove("is-guiding-off");
   };
 
   const overLock = (x, y) => {
@@ -244,10 +252,32 @@ function bindKeyDrag() {
     return x > r.left - 24 && x < r.right + 24 && y > r.top - 24 && y < r.bottom + 24;
   };
 
+  const openGate = () => {
+    if (unlocked) return;
+    unlocked = true;
+    if (dock) dock.classList.add("is-guiding-off");
+    $("gate-scene").classList.add("is-open");
+    setTimeout(() => goToStage("greeting"), 1150);
+  };
+
+  const enableClickUnlock = () => {
+    if (clickUnlockEnabled) return;
+    clickUnlockEnabled = true;
+    plate.classList.add("is-clickable");
+    plate.setAttribute("role", "button");
+    plate.setAttribute("tabindex", "0");
+    plate.setAttribute("aria-label", "點一下鎖孔開啟大門");
+    if (tapHint) tapHint.hidden = false;
+    if (keyLabel) keyLabel.textContent = "拖曳或點鎖孔";
+  };
+
   const onDown = (e) => {
+    if (unlocked) return;
     const pt = "touches" in e ? e.touches[0] : e;
     dragging = true;
+    moved = false;
     key.classList.add("is-dragging");
+    if (dock) dock.classList.add("is-guiding-off");
     if (e.pointerId != null && key.setPointerCapture) {
       key.setPointerCapture(e.pointerId);
     }
@@ -261,7 +291,10 @@ function bindKeyDrag() {
     if (!dragging) return;
     const pt = "touches" in e ? e.touches[0] : e;
     if ("touches" in e) e.preventDefault();
-    place(origin.x + (pt.clientX - start.x), origin.y + (pt.clientY - start.y));
+    const dx = pt.clientX - start.x;
+    const dy = pt.clientY - start.y;
+    if (Math.hypot(dx, dy) > 8) moved = true;
+    place(origin.x + dx, origin.y + dy);
     plate.classList.toggle("is-target", overLock(pt.clientX, pt.clientY));
   };
 
@@ -270,15 +303,27 @@ function bindKeyDrag() {
     dragging = false;
     const pt = "changedTouches" in e ? e.changedTouches[0] : e;
     if (overLock(pt.clientX, pt.clientY)) {
-      $("gate-scene").classList.add("is-open");
-      setTimeout(() => goToStage("greeting"), 1150);
+      openGate();
+    } else if (moved) {
+      failCount += 1;
+      if (failCount >= 2) enableClickUnlock();
     }
     reset();
+  };
+
+  const onPlateActivate = (e) => {
+    if (!clickUnlockEnabled || unlocked) return;
+    e.preventDefault();
+    openGate();
   };
 
   key.addEventListener("pointerdown", onDown);
   window.addEventListener("pointermove", onMove);
   window.addEventListener("pointerup", onUp);
+  plate.addEventListener("click", onPlateActivate);
+  plate.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") onPlateActivate(e);
+  });
 }
 
 function googleCalendarUrl() {
@@ -453,8 +498,13 @@ function init() {
   });
 
   $("keypad").addEventListener("click", (e) => {
-    const key = e.target.dataset.key;
+    const btn = e.target.closest("button[data-key]");
+    if (!btn) return;
+    const key = btn.dataset.key;
     if (!key) return;
+    if (typeof navigator.vibrate === "function") {
+      try { navigator.vibrate(12); } catch (_) { /* ignore */ }
+    }
     $("safe-unlock").hidden = true;
     if (key === "C") state.pin = "";
     else if (key === "OK") tryUnlock();
