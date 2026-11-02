@@ -604,7 +604,7 @@ h1, h2, h3 {
   bottom: 268px;
   z-index: 3;
   width: 34%;
-  height: 108px;
+  height: 82px;
 }
 
 .head-panel {
@@ -623,9 +623,9 @@ h1, h2, h3 {
 .head-panel span {
   position: absolute;
   left: 50%;
-  top: 22px;
-  width: 36px;
-  height: 36px;
+  top: 14px;
+  width: 30px;
+  height: 30px;
   transform: translateX(-50%);
   display: grid;
   place-items: center;
@@ -634,7 +634,7 @@ h1, h2, h3 {
   background: radial-gradient(circle at 35% 30%, #c41e1e, #4a0505);
   color: #f6ead0;
   font-family: var(--font);
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .bed {
@@ -657,7 +657,7 @@ h1, h2, h3 {
 
 .pillows span {
   flex: 1;
-  height: 30px;
+  height: 22px;
   border-radius: 10px 10px 3px 3px;
   border: 2px solid #d4af37;
   background: linear-gradient(#f8edd4, #e4c98a);
@@ -665,8 +665,8 @@ h1, h2, h3 {
 }
 
 .quilt {
-  height: 58px;
-  margin-top: 6px;
+  height: 70px;
+  margin-top: 4px;
   border: 2px solid #f0d78a;
   background:
     linear-gradient(#f0d78a, #f0d78a) center / 78% 2px no-repeat,
@@ -810,15 +810,17 @@ h1, h2, h3 {
 .wardrobe-dress {
   position: absolute;
   z-index: 1;
-  left: 52%;
-  top: 10%;
-  width: 34%;
-  height: 78%;
+  left: 50%;
+  top: 8%;
+  width: 44%;
+  height: 82%;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
-  transform: translateX(-20%);
+  transform: translateX(-42%);
+  /* 加大可點範圍，視覺剪影仍置中 */
+  touch-action: manipulation;
 }
 
 .wardrobe-dress:focus-visible {
@@ -908,9 +910,10 @@ h1, h2, h3 {
 
 .wardrobe-doors span:first-child::after { right: 5px; }
 .wardrobe-doors span.ajar {
-  transform: perspective(120px) rotateY(-22deg);
-  transform-origin: left center;
-  opacity: 0.92;
+  /* 鉸鏈在外側右：由中間往外開，門縫加大方便點禮服 */
+  transform: perspective(140px) rotateY(46deg);
+  transform-origin: right center;
+  opacity: 0.94;
 }
 .wardrobe-doors span.ajar::after { left: 6px; }
 
