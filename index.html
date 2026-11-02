@@ -111,7 +111,10 @@
     <header class="room-header">
       <p class="eyebrow">SUITE 囍 · GRAND HOTEL</p>
       <h2>圓山豪華客房</h2>
-      <p>房裡有幾件傢俱微微發亮，點一下就能靠近看。</p>
+      <p>
+        <span>房裡有幾件傢俱微微發亮，</span>
+        <span>點一下就能靠近看。</span>
+      </p>
     </header>
 
     <div class="room" id="room">
@@ -198,7 +201,7 @@
         </div>
       </button>
 
-      <button type="button" class="hotspot safe-hotspot" data-modal="safe" data-title="古董保險箱" data-hint="四位數密碼鎖著。線索應該就在這間房裡。" aria-label="古董保險箱">
+      <button type="button" class="hotspot safe-hotspot" data-modal="safe" data-title="古董保險箱" data-hint="保險箱密碼鎖著。線索應該就在這間房裡。" aria-label="古董保險箱">
         <div class="prop safe-prop">
           <div class="safe-door">
             <div class="safe-dial"></div>
@@ -354,7 +357,7 @@
     <div class="modal" id="modal-safe" role="dialog" aria-labelledby="safe-title" hidden>
       <button type="button" class="modal-close" data-close="true" aria-label="關閉">×</button>
       <h3 id="safe-title">🗄️ 古董保險箱</h3>
-      <p class="modal-lead">請輸入四位數密碼</p>
+      <p class="modal-lead">請輸入密碼後按確認</p>
       <div class="safe-display" id="safe-display">----</div>
       <div class="keypad" id="keypad">
         <button type="button" data-key="1">1</button>

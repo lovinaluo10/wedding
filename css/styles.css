@@ -140,21 +140,38 @@ h1, h2, h3 {
   text-align: center;
   max-width: 420px;
   margin: 0 auto 8px;
+  padding: 14px 16px 16px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 8, 12, 0.42),
+    rgba(30, 8, 12, 0.28)
+  );
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.welcome-copy .eyebrow {
+  color: var(--text-gold);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
 .welcome-copy h1 {
   font-family: var(--font);
   font-size: clamp(34px, 10vw, 52px);
-  color: var(--gold-soft);
+  color: var(--text-cream);
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.75),
+    0 0 18px rgba(212, 175, 55, 0.28);
 }
 
 .hint {
   display: grid;
   gap: 6px;
   justify-items: center;
-  color: var(--text-muted-gold);
+  color: var(--text-gold);
   line-height: 1.7;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .hint span {
@@ -437,15 +454,42 @@ h1, h2, h3 {
   text-align: center;
   max-width: 460px;
   margin: 0 auto 12px;
+  padding: 14px 16px 16px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 8, 12, 0.42),
+    rgba(30, 8, 12, 0.28)
+  );
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.room-header .eyebrow {
+  color: var(--text-gold);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
 .room-header h2 {
   font-family: var(--font);
   font-size: 32px;
-  color: var(--gold-soft);
+  color: var(--text-cream);
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.75),
+    0 0 18px rgba(212, 175, 55, 0.28);
 }
 
-.room-header p { color: #ecd9b0; }
+.room-header > p:not(.eyebrow) {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  color: var(--text-gold);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  line-height: 1.7;
+}
+
+.room-header > p:not(.eyebrow) span {
+  display: block;
+}
 
 .room {
   position: relative;

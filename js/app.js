@@ -172,20 +172,24 @@ function renderPhoto() {
   };
 }
 
+let unlockAudio = null;
+
 function playUnlockSound() {
-  const Ctx = window.AudioContext || window.webkitAudioContext;
-  if (!Ctx) return;
-  const ctx = new Ctx();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = "square";
-  osc.frequency.value = 180;
-  gain.gain.value = 0.05;
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start();
-  osc.frequency.exponentialRampToValueAtTime(90, ctx.currentTime + 0.18);
-  osc.stop(ctx.currentTime + 0.22);
+  try {
+    if (unlockAudio) {
+      unlockAudio.pause();
+      unlockAudio.currentTime = 0;
+    }
+    unlockAudio = new Audio("sounds/safe-unlock.m4a");
+    unlockAudio.preload = "auto";
+    unlockAudio.volume = 0.9;
+    const playPromise = unlockAudio.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  } catch (_) {
+    /* ignore autoplay / format errors */
+  }
 }
 
 function updateSafeDisplay() {
@@ -212,7 +216,8 @@ function tryUnlock() {
   hintBtn.hidden = true;
   $("safe-unlock").hidden = false;
   playUnlockSound();
-  setTimeout(() => goToStage("invite"), 900);
+  // Match trimmed unlock clip (~3.0s).
+  setTimeout(() => goToStage("invite"), 3000);
 }
 
 function bindKeyDrag() {
