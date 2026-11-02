@@ -104,6 +104,23 @@ function openInspect(btn) {
   $("inspect").hidden = false;
 }
 
+function openDressInspect(dressEl) {
+  const stage = $("inspect-stage");
+  const clone = dressEl.cloneNode(true);
+  clone.classList.add("dress-inspect");
+  clone.removeAttribute("tabindex");
+  clone.setAttribute("aria-hidden", "true");
+  stage.replaceChildren(clone);
+  $("inspect-title").textContent = dressEl.dataset.title || "暗紅禮服";
+  $("inspect-hint").textContent = dressEl.dataset.hint || "今晚要穿的喜服。";
+  state.inspectModal = "";
+  state.inspectDetail = dressEl.dataset.detail || "";
+  $("inspect-detail").hidden = true;
+  $("inspect-detail").textContent = "";
+  $("inspect-open").textContent = "仔細查看";
+  $("inspect").hidden = false;
+}
+
 function closeInspect() {
   const panel = $("inspect");
   if (!panel || panel.hidden) return;
@@ -469,7 +486,23 @@ function init() {
   bindKeyDrag();
 
   document.querySelectorAll(".hotspot").forEach((btn) => {
-    btn.addEventListener("click", () => openInspect(btn));
+    btn.addEventListener("click", (e) => {
+      const dress = e.target.closest(".wardrobe-dress");
+      if (dress && btn.contains(dress)) {
+        e.preventDefault();
+        openDressInspect(dress);
+        return;
+      }
+      openInspect(btn);
+    });
+  });
+  document.querySelectorAll(".wardrobe-dress").forEach((dress) => {
+    dress.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      e.stopPropagation();
+      openDressInspect(dress);
+    });
   });
   $("inspect").addEventListener("click", (e) => {
     if (e.target.closest("[data-close-inspect]")) closeInspect();

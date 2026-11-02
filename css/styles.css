@@ -798,14 +798,92 @@ h1, h2, h3 {
   background: linear-gradient(#f0d78a, #8a6a12);
 }
 
-.wardrobe-doors {
+.wardrobe-cavity {
+  position: relative;
   flex: 1;
+  min-height: 0;
+  background: #1a100c;
+  border: 3px solid #8a5a28;
+  border-block: none;
+}
+
+.wardrobe-dress {
+  position: absolute;
+  z-index: 1;
+  left: 52%;
+  top: 10%;
+  width: 34%;
+  height: 78%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translateX(-20%);
+}
+
+.wardrobe-dress:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.dress-hanger {
+  position: absolute;
+  top: 2%;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #c9a227, #f0d78a, #8a6a12);
+}
+
+.dress-hook {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 10px;
+  transform: translateX(-50%);
+  border: 2px solid #d4af37;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  box-sizing: border-box;
+}
+
+.dress-bodice {
+  position: absolute;
+  top: 12%;
+  left: 22%;
+  right: 22%;
+  height: 28%;
+  background:
+    linear-gradient(180deg, rgba(243, 229, 171, 0.35), transparent 28%),
+    linear-gradient(180deg, #9a1212, #5c0707 70%, #3b0505);
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.25);
+}
+
+.dress-skirt {
+  position: absolute;
+  top: 38%;
+  left: 4%;
+  right: 4%;
+  bottom: 2%;
+  background:
+    linear-gradient(180deg, rgba(243, 229, 171, 0.2), transparent 22%),
+    linear-gradient(180deg, #7a0c0c, #4a0505 55%, #2a0303);
+  clip-path: polygon(28% 0, 72% 0, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.18);
+}
+
+.wardrobe-doors {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
   padding: 5px;
-  background: #24160e;
-  border: 3px solid #8a5a28;
+  pointer-events: none;
 }
 
 .wardrobe-doors span {
@@ -815,6 +893,7 @@ h1, h2, h3 {
     linear-gradient(#d4af37, #d4af37) center calc(100% - 12px) / 70% 2px no-repeat,
     linear-gradient(#6a4324, #3a2414);
   border: 2px solid #d4af37;
+  pointer-events: none;
 }
 
 .wardrobe-doors span::after {
@@ -829,10 +908,28 @@ h1, h2, h3 {
 
 .wardrobe-doors span:first-child::after { right: 5px; }
 .wardrobe-doors span.ajar {
-  transform: perspective(120px) rotateY(-16deg);
+  transform: perspective(120px) rotateY(-22deg);
   transform-origin: left center;
+  opacity: 0.92;
 }
 .wardrobe-doors span.ajar::after { left: 6px; }
+
+.inspect-stage .wardrobe-dress.dress-inspect {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 88px;
+  height: 180px;
+  transform: none;
+  margin: 0 auto;
+}
+
+.inspect-stage .wardrobe-dress.dress-inspect .dress-bodice,
+.inspect-stage .wardrobe-dress.dress-inspect .dress-skirt {
+  box-shadow:
+    inset 0 0 0 1px rgba(212, 175, 55, 0.35),
+    0 8px 18px rgba(0, 0, 0, 0.35);
+}
 
 .envelope-prop {
   position: relative;

@@ -159,9 +159,25 @@
       <button type="button" class="hotspot wardrobe-hotspot" data-title="衣櫃" data-hint="櫃門輕掩著，裡面掛著一件暗紅禮服。" data-detail="口袋與衣襯都是空的。" aria-label="衣櫃">
         <div class="prop wardrobe-prop">
           <div class="wardrobe-crown"></div>
-          <div class="wardrobe-doors">
-            <span></span>
-            <span class="ajar"></span>
+          <div class="wardrobe-cavity">
+            <div
+              class="wardrobe-dress"
+              role="button"
+              tabindex="0"
+              data-title="暗紅禮服"
+              data-hint="今晚要穿的喜服。"
+              data-detail="裙襬與領口都整理好了，沒有夾帶紙條。"
+              aria-label="暗紅禮服，今晚要穿的喜服"
+            >
+              <span class="dress-hanger" aria-hidden="true"></span>
+              <span class="dress-hook" aria-hidden="true"></span>
+              <span class="dress-bodice" aria-hidden="true"></span>
+              <span class="dress-skirt" aria-hidden="true"></span>
+            </div>
+            <div class="wardrobe-doors">
+              <span></span>
+              <span class="ajar"></span>
+            </div>
           </div>
           <div class="wardrobe-plinth"></div>
         </div>
