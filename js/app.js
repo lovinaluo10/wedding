@@ -146,6 +146,28 @@ function closeModal() {
   root.classList.remove("is-open");
 }
 
+function openLightbox(src, alt) {
+  const box = $("image-lightbox");
+  const img = $("image-lightbox-img");
+  if (!box || !img || !src) return;
+  img.src = src;
+  img.alt = alt || "";
+  box.hidden = false;
+  document.body.classList.add("lightbox-open");
+}
+
+function closeLightbox() {
+  const box = $("image-lightbox");
+  const img = $("image-lightbox-img");
+  if (!box || box.hidden) return;
+  box.hidden = true;
+  if (img) {
+    img.removeAttribute("src");
+    img.alt = "";
+  }
+  document.body.classList.remove("lightbox-open");
+}
+
 function renderCalendar() {
   const page = MONTHS[state.calIndex];
   $("cal-caption").textContent = page.caption;
@@ -524,6 +546,25 @@ function init() {
   });
   document.querySelectorAll("[data-open-modal]").forEach((btn) => {
     btn.addEventListener("click", () => openModal(btn.dataset.openModal));
+  });
+
+  document.querySelectorAll("[data-lightbox-src]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openLightbox(btn.dataset.lightboxSrc, btn.dataset.lightboxAlt || "");
+    });
+  });
+  $("image-lightbox").addEventListener("click", (e) => {
+    if (e.target.closest("[data-close-lightbox]")) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (!$("image-lightbox").hidden) {
+      closeLightbox();
+      return;
+    }
+    if (!$("modal-root").hidden) closeModal();
   });
 
   $("cal-prev").addEventListener("click", () => {
