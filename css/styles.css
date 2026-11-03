@@ -1815,18 +1815,25 @@ blockquote {
 
 .transit-map-zoom {
   position: relative;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 100%;
+  max-height: min(45vh, 360px);
   padding: 0;
   border: 0;
-  background: transparent;
+  background: #f7f1e6;
   cursor: zoom-in;
+  overflow: hidden;
 }
 
 .transit-map-photo img {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
+  max-height: min(45vh, 360px);
+  object-fit: contain;
+  object-position: center top;
 }
 
 .transit-map-zoom-hint {
@@ -1878,15 +1885,18 @@ blockquote {
   position: relative;
   z-index: 1;
   margin: 0;
-  max-width: min(1100px, 100%);
+  max-width: min(720px, 100%);
   max-height: 92svh;
+  display: grid;
+  place-items: center;
 }
 
 .image-lightbox-figure img {
   display: block;
-  width: 100%;
-  max-height: 92svh;
+  width: auto;
   height: auto;
+  max-width: min(720px, 100%);
+  max-height: 92svh;
   object-fit: contain;
   background: #f7f1e6;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
