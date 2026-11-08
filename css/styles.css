@@ -1415,41 +1415,73 @@ textarea {
 .vip-pass .eyebrow,
 .vip-pass h2,
 .vip-pass .vip-name,
-.vip-pass .vip-msg,
-.vip-pass .gold-btn {
+.vip-pass .vip-msg {
   font-family: var(--font-card);
 }
 
 .vip-pass .eyebrow {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.22em;
 }
 
 .vip-pass h2 {
-  font-size: clamp(30px, 8vw, 38px);
+  font-size: clamp(32px, 8.5vw, 42px);
   margin: 6px 0 4px;
 }
 
 .vip-name {
-  font-size: clamp(38px, 10vw, 48px);
+  font-size: clamp(40px, 10.5vw, 52px);
   color: var(--gold-soft);
 }
 
 .vip-msg {
-  font-size: clamp(17px, 4.2vw, 20px);
-  line-height: 1.85;
+  margin: 12px 0 0;
+  line-height: 1.7;
   color: var(--text-muted-gold);
 }
 
-.vip-pass .gold-btn {
-  font-size: 17px;
-  padding: 15px 14px;
-  margin-top: 14px;
+.vip-msg p {
+  margin: 0;
+}
+
+.vip-greeting {
+  margin-bottom: 12px !important;
+  font-size: clamp(20px, 5vw, 24px);
+  color: var(--gold-soft);
+  letter-spacing: 0.04em;
+}
+
+.vip-when,
+.vip-hotel {
+  font-size: clamp(18px, 4.6vw, 22px);
+  color: var(--gold);
+}
+
+.vip-hotel {
+  margin-top: 2px !important;
+}
+
+.vip-venue {
+  margin-top: 6px !important;
+  font-size: clamp(16px, 4.2vw, 19px);
+  color: var(--text-muted-gold);
+  letter-spacing: 0.03em;
 }
 
 .vip-thanks {
   margin: 14px auto 0;
-  max-width: 16em;
+  max-width: 17em;
+  font-size: clamp(20px, 5vw, 24px);
+  line-height: 1.85;
+  color: var(--gold-soft);
+  letter-spacing: 0.03em;
+}
+
+.vip-pass .gold-btn {
+  font-family: var(--font);
+  font-size: 18px;
+  padding: 15px 14px;
+  margin-top: 16px;
 }
 
 .modal-root {
