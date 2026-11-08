@@ -373,11 +373,11 @@ function bindKeyDrag() {
 function googleCalendarUrl() {
   const text = encodeURIComponent("圓山喜宴 · 觀禮與喜宴");
   const details = encodeURIComponent(
-    "11:00 觀禮證婚儀式\n12:00 圓山大廳 貴賓尊榮大合影\n12:30 喜宴盛大開席"
+    "09:45 戶外證婚（誠摯歡迎觀禮）\n10:15 圓山大廳 貴賓尊榮大合影\n12:00 喜宴盛大開席"
   );
   const location = encodeURIComponent("台北圓山大飯店 崑崙廳（12樓）");
-  // 台灣時間 2027/02/21 11:00–15:30 → UTC 03:00–07:30
-  const dates = "20270221T030000Z/20270221T073000Z";
+  // 台灣時間 2027/02/21 09:45–15:30 → UTC 01:45–07:30
+  const dates = "20270221T014500Z/20270221T073000Z";
   return `https://www.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
 }
 
