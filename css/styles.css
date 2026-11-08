@@ -1190,7 +1190,25 @@ h1, h2, h3 {
 }
 
 .invite-date span { font-size: 14px; margin-left: 6px; color: var(--text-muted-gold); }
-.invite-place { font-size: 18px; }
+
+.invite-place {
+  margin: 4px 0 0;
+  text-align: left;
+}
+
+.invite-hotel {
+  margin: 0;
+  font-size: 18px;
+  color: var(--gold-soft);
+  letter-spacing: 0.04em;
+}
+
+.invite-venue {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--text-muted-gold);
+  letter-spacing: 0.03em;
+}
 
 .transit-btn {
   display: inline-block;
