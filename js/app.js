@@ -50,6 +50,26 @@ const PHOTOS = [
   { src: "images/photo3.jpg", caption: "同行" },
 ];
 
+const PHONE_MESSAGES = [
+  {
+    src: "sounds/phone-message-a.m4a",
+    script:
+      "您好，這裡是圓山大飯店，非常感謝貴賓今日的入住，請幫我確認牆上日曆的日期，那是通往秘宴的鑰匙喔。",
+    btn: "聆聽聽筒留言",
+  },
+  {
+    src: "sounds/phone-message-b.m4a",
+    script:
+      "叮咚，客房服務提醒您：解謎完之後不要忘記填出席表單哦，我們在婚禮上等你來玩。",
+    btn: "再聽一次？",
+  },
+  {
+    src: "sounds/phone-message-c.m4a",
+    script: "嘘，偷偷告訴你，這個房間的相框有秘密。",
+    btn: "……好像還有一段",
+  },
+];
+
 const state = {
   stage: "welcome",
   calIndex: 0,
@@ -57,6 +77,7 @@ const state = {
   photoIndex: 0,
   inspectModal: "",
   inspectDetail: "",
+  phoneMsgIndex: 0,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -144,6 +165,7 @@ function closeModal() {
   const root = $("modal-root");
   root.hidden = true;
   root.classList.remove("is-open");
+  resetPhoneMessage();
 }
 
 function openLightbox(src, alt) {
@@ -212,6 +234,7 @@ function renderPhoto() {
 }
 
 let unlockAudio = null;
+let phoneAudio = null;
 
 function playUnlockSound() {
   try {
@@ -229,6 +252,68 @@ function playUnlockSound() {
   } catch (_) {
     /* ignore autoplay / format errors */
   }
+}
+
+function stopPhoneAudio() {
+  if (!phoneAudio) return;
+  try {
+    phoneAudio.pause();
+    phoneAudio.currentTime = 0;
+  } catch (_) {
+    /* ignore */
+  }
+  phoneAudio = null;
+}
+
+function resetPhoneMessage() {
+  stopPhoneAudio();
+  state.phoneMsgIndex = 0;
+  const btn = $("play-message");
+  const wave = $("phone-wave");
+  const script = $("phone-script");
+  if (btn) btn.textContent = PHONE_MESSAGES[0].btn;
+  if (wave) wave.hidden = true;
+  if (script) {
+    script.hidden = true;
+    script.textContent = "";
+  }
+}
+
+function playPhoneMessage() {
+  const msg = PHONE_MESSAGES[state.phoneMsgIndex];
+  if (!msg) return;
+
+  const wave = $("phone-wave");
+  const script = $("phone-script");
+  const btn = $("play-message");
+  if (wave) wave.hidden = false;
+  if (script) {
+    script.hidden = false;
+    script.textContent = msg.script;
+  }
+
+  stopPhoneAudio();
+  try {
+    phoneAudio = new Audio(msg.src);
+    phoneAudio.preload = "auto";
+    phoneAudio.volume = 0.95;
+    phoneAudio.addEventListener(
+      "ended",
+      () => {
+        if (wave) wave.hidden = true;
+      },
+      { once: true }
+    );
+    const playPromise = phoneAudio.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  } catch (_) {
+    /* ignore autoplay / format errors */
+  }
+
+  state.phoneMsgIndex = (state.phoneMsgIndex + 1) % PHONE_MESSAGES.length;
+  if (btn) btn.textContent = PHONE_MESSAGES[state.phoneMsgIndex].btn;
 }
 
 function updateSafeDisplay() {
@@ -592,10 +677,7 @@ function init() {
   });
   $("safe-hint-btn").addEventListener("click", () => openModal("calendar"));
 
-  $("play-message").addEventListener("click", () => {
-    $("phone-wave").hidden = false;
-    $("phone-script").hidden = false;
-  });
+  $("play-message").addEventListener("click", playPhoneMessage);
 
   $("photo-prev").addEventListener("click", () => {
     state.photoIndex = (state.photoIndex + PHOTOS.length - 1) % PHOTOS.length;
