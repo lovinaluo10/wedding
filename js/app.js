@@ -56,17 +56,18 @@ const PHONE_MESSAGES = [
     script:
       "您好，這裡是圓山大飯店，非常感謝貴賓今日的入住，請幫我確認牆上日曆的日期，那是通往秘宴的鑰匙喔。",
     btn: "聆聽聽筒留言",
+    nextBtn: "還有下一個留言要聽嗎？",
   },
   {
     src: "sounds/phone-message-b.m4a",
     script:
       "叮咚，客房服務提醒您：解謎完之後不要忘記填出席表單哦，我們在婚禮上等你來玩。",
-    btn: "再聽一次？",
+    nextBtn: "好像還有一段留言...？",
   },
   {
     src: "sounds/phone-message-c.m4a",
     script: "嘘，偷偷告訴你，這個房間的相框有秘密。",
-    btn: "……好像還有一段",
+    nextBtn: "再聽一次",
   },
 ];
 
@@ -280,7 +281,10 @@ function resetPhoneMessage() {
 }
 
 function playPhoneMessage() {
-  const msg = PHONE_MESSAGES[state.phoneMsgIndex];
+  if (phoneAudio && !phoneAudio.paused && !phoneAudio.ended) return;
+
+  const playedIndex = state.phoneMsgIndex;
+  const msg = PHONE_MESSAGES[playedIndex];
   if (!msg) return;
 
   const wave = $("phone-wave");
@@ -301,19 +305,20 @@ function playPhoneMessage() {
       "ended",
       () => {
         if (wave) wave.hidden = true;
+        state.phoneMsgIndex = (playedIndex + 1) % PHONE_MESSAGES.length;
+        if (btn) btn.textContent = msg.nextBtn;
       },
       { once: true }
     );
     const playPromise = phoneAudio.play();
     if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {});
+      playPromise.catch(() => {
+        if (wave) wave.hidden = true;
+      });
     }
   } catch (_) {
-    /* ignore autoplay / format errors */
+    if (wave) wave.hidden = true;
   }
-
-  state.phoneMsgIndex = (state.phoneMsgIndex + 1) % PHONE_MESSAGES.length;
-  if (btn) btn.textContent = PHONE_MESSAGES[state.phoneMsgIndex].btn;
 }
 
 function updateSafeDisplay() {
